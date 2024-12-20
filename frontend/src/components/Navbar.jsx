@@ -4,8 +4,32 @@ import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
+import { useState } from "react";
+import avatarImg from "../assets/avatar.png";
+
+const navigation = [
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+  },
+  {
+    name: "Orders",
+    href: "/orders",
+  },
+  {
+    name: "Cart Page",
+    href: "/cart",
+  },
+  {
+    name: "Checkout",
+    href: "/checkout",
+  },
+];
 
 const Navbar = () => {
+  const currentUser = true;
+  const [isDropdownOpen, setisDropdownOpen] = useState(false);
+
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
       <nav className="flex justify-between items-center">
@@ -27,15 +51,48 @@ const Navbar = () => {
         </div>
 
         {/* right side */}
-        <div>
-          <HiOutlineUser className="size-6" />
+        <div className="relative flex items-center md:space-x-3 space-x-1">
+          <div>
+            {currentUser ? (
+              <>
+                <button onClick={() => setisDropdownOpen(!isDropdownOpen)}>
+                  <img
+                    src={avatarImg}
+                    alt=""
+                    className={`size-7 rounded-full ${
+                      currentUser ? "ring-2 ring-blue-500" : ""
+                    }`}
+                  />
+                </button>
+                {/*Show Dropdown*/}
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40">
+                    <ul className="py-2">
+                      {navigation.map((item) => (
+                        <li key={item.name}>
+                          <Link to={item.href} className="block px-4 py-2 text-sm hover:bg-gray-100">{item.name}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            ) : (
+              <Link to="/login">
+                <HiOutlineUser className="size-6" />
+              </Link>
+            )}
+          </div>
           <button className="hidden sm:block">
             <HiOutlineHeart className="size-6" />
           </button>
 
-          <Link to='cart' className="bg-primary p-1 sm:px-6 px-2 flex item-center rounded-md">
+          <Link
+            to="cart"
+            className="bg-primary p-1 sm:px-6 px-2 flex item-center rounded-md"
+          >
             <HiOutlineShoppingCart className="size-6" />
-            <span>0</span>
+            <span className="text-sm font-semibold sm:ml-1">0</span>
           </Link>
         </div>
       </nav>
