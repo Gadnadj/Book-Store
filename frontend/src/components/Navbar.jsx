@@ -69,7 +69,7 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40">
                     <ul className="py-2">
                       {navigation.map((item) => (
-                        <li key={item.name}>
+                        <li key={item.name} onClick={() => setisDropdownOpen(false)}>
                           <Link to={item.href} className="block px-4 py-2 text-sm hover:bg-gray-100">{item.name}</Link>
                         </li>
                       ))}
