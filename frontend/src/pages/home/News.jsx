@@ -87,7 +87,9 @@ const News = () => {
               <div className="py-4">
                 <Link to="/">
                   <h3 className="text-lg font-medium hover:text-blue-500 mb-4">
-                    {item.title}
+                    {item.title.length > 40
+                      ? `${item.title.slice(0, 40)}...`
+                      : item.title}
                   </h3>
                 </Link>
                 <div className="w-100 bg-primary h-[4px] mb-5"></div>
