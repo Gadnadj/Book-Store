@@ -11,7 +11,7 @@ const BookCard = ({ book }) => {
         <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
           <Link to={`/books/${book._id}`}>
             <img
-              src={`${getImgUrl(book.coverImage)}`}
+              src={`${getImgUrl(book?.coverImage)}`}
               alt=""
               className="w-full bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
             />
@@ -19,20 +19,20 @@ const BookCard = ({ book }) => {
         </div>
 
         <div>
-          <Link to={`/books/${book._id}`}>
+          <Link to={`/books/${book?._id}`}>
             <h3 className="text-xl font-semibold hover:text-blue-600 mb-3">
-              {book.title}
+              {book?.title}
             </h3>
           </Link>
           <p className="text-gray-600 mb-5">
             {book.description.length > 80
               ? `${book.description.slice(0, 80)}...`
-              : book.description}
+              : book?.description}
           </p>
           <p className="font-medium mb-5">
-            {book.oldPrice}{" "}
+            ${book?.newPrice}
             <span className="line-through font-normal ml-2">
-              {book.newPrice}
+              ${book?.newPrice}
             </span>
           </p>
           <button className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
