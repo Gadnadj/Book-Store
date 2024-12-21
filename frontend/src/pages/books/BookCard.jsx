@@ -1,29 +1,35 @@
 import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
+import { getImgUrl } from "../../utils/getImgUrl";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const BookCard = () => {
+const BookCard = ({ book }) => {
   return (
     <div className=" rounded-lg transition-shadow duration-300">
       <div className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4">
         <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
-          <a href="/">
+          <Link to={`/books/${book._id}`}>
             <img
-              src="assets/books/book-1.png"
+              src={`${getImgUrl(book.coverImage)}`}
               alt=""
               className="w-full bg-cover p-2 rounded-md cursor-pointer hover:scale-105 transition-all duration-200"
             />
-          </a>
+          </Link>
         </div>
 
         <div>
-          <a href="/">
+          <Link to={`/books/${book._id}`}>
             <h3 className="text-xl font-semibold hover:text-blue-600 mb-3">
-              Book Title
+              {book.title}
             </h3>
-          </a>
-          <p className="text-gray-600 mb-5">Book Description</p>
+          </Link>
+          <p className="text-gray-600 mb-5">{book.description}</p>
           <p className="font-medium mb-5">
-            $80 <span className="line-through font-normal ml-2">$100</span>
+            {book.oldPrice}{" "}
+            <span className="line-through font-normal ml-2">
+              {book.newPrice}
+            </span>
           </p>
           <button className="btn-primary px-6 space-x-1 flex items-center gap-1 ">
             <FiShoppingCart className="" />
@@ -33,6 +39,16 @@ const BookCard = () => {
       </div>
     </div>
   );
+};
+BookCard.propTypes = {
+  book: PropTypes.shape({
+    coverImage: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    oldPrice: PropTypes.number.isRequired,
+    newPrice: PropTypes.number.isRequired,
+    _id: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 export default BookCard;
