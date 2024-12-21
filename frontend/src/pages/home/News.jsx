@@ -60,6 +60,7 @@ const News = () => {
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
+        navigation={true}
         breakpoints={{
           640: {
             slidesPerView: 1,
@@ -74,12 +75,15 @@ const News = () => {
             spaceBetween: 50,
           },
         }}
-        modules={[Pagination]}
+        modules={[Pagination, Navigation]}
         className="mySwiper"
       >
         {news.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-12">
+              <div className="flex-shrink-0">
+                <img src={item.image} alt="" className="2-full object-cover" />
+              </div>
               <div className="py-4">
                 <Link to="/">
                   <h3 className="text-lg font-medium hover:text-blue-500 mb-4">
@@ -88,9 +92,6 @@ const News = () => {
                 </Link>
                 <div className="w-100 bg-primary h-[4px] mb-5"></div>
                 <p className="text-sm text-gray-600">{item.description}</p>
-              </div>
-              <div className="flex-shrink-0">
-                <img src={item.image} alt="" className="2-full object-cover" />
               </div>
             </div>
           </SwiperSlide>
