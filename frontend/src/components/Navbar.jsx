@@ -59,7 +59,7 @@ const Navbar = () => {
                   <img
                     src={avatarImg}
                     alt=""
-                    className={`size-7 rounded-full ${
+                    className={`size-7 rounded-full max-sm:mr-1 ${
                       currentUser ? "ring-2 ring-blue-500" : ""
                     }`}
                   />
