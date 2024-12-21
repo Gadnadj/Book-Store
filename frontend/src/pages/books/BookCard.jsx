@@ -20,11 +20,11 @@ const BookCard = ({ book }) => {
 
         <div>
           <Link to={`/books/${book?._id}`}>
-            <h3 className="text-xl font-semibold hover:text-blue-600 mb-3">
+            <h3 className="text-xl font-semibold hover:text-blue-600">
               {book?.title}
             </h3>
           </Link>
-          <p className="text-gray-600 mb-5">
+          <p className="text-gray-600 mb-3">
             {book.description.length > 80
               ? `${book.description.slice(0, 80)}...`
               : book?.description}
