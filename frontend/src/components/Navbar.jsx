@@ -27,7 +27,7 @@ const navigation = [
 ];
 
 const Navbar = () => {
-  const currentUser = true;
+  const currentUser = false;
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
 
   return (
@@ -70,7 +70,7 @@ const Navbar = () => {
                     <ul className="py-2">
                       {navigation.map((item) => (
                         <li key={item.name} onClick={() => setisDropdownOpen(false)}>
-                          <Link to={item.href} className="block px-4 py-2 text-sm hover:bg-gray-100">{item.name}</Link>
+                         w <Link to={item.href} className="block px-4 py-2 text-sm hover:bg-gray-100">{item.name}</Link>
                         </li>
                       ))}
                     </ul>
@@ -79,7 +79,7 @@ const Navbar = () => {
               </>
             ) : (
               <Link to="/login">
-                <HiOutlineUser className="size-6" />
+                <HiOutlineUser className="size-6" color="white"   />
               </Link>
             )}
           </div>
