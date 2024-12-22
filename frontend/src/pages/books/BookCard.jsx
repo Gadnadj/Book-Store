@@ -3,8 +3,15 @@ import { FiShoppingCart } from "react-icons/fi";
 import { getImgUrl } from "../../utils/getImgUrl";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const BookCard = ({ book }) => {
+  
+  const dispatch = useDispatch();
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
   return (
     <div className="transition-shadow duration-300 bg-[#f8fcfc] rounded-lg  ">
       <div className="flex flex-col sm:flex-row sm:items-center sm:h-72 sm:justify-center gap-4 ">
@@ -20,7 +27,7 @@ const BookCard = ({ book }) => {
 
         <div>
           <Link to={`/books/${book?._id}`}>
-          <h3 className="text-lg font-semibold hover:text-blue-600 mb-2">
+            <h3 className="text-lg font-semibold hover:text-blue-600 mb-2">
               {book?.title.length > 14
                 ? `${book?.title.slice(0, 14)}...`
                 : book?.title}
@@ -37,7 +44,10 @@ const BookCard = ({ book }) => {
               ${book?.oldPrice}
             </span>
           </p>
-          <button className="btn-primary px-6 mt-6 space-x-1 flex items-center gap-1 ">
+          <button
+            onClick={() => handleAddToCart(book)}
+            className="btn-primary px-6 mt-6 space-x-1 flex items-center gap-1 "
+          >
             <FiShoppingCart className="" />
             <span>Add to Cart</span>
           </button>
