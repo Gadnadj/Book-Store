@@ -31,12 +31,12 @@ const Navbar = () => {
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
 
   return (
-    <header className="max-w-screen-2xl mx-auto px-4 py-6">
+    <header className="max-w-screen-2xl mx-auto px-4 py-6 bg-gray-900">
       <nav className="flex justify-between items-center">
         {/* left side */}
         <div className="flex items-center md:gap-16 gap-4">
           <Link to="/">
-            <HiMiniBars3CenterLeft className="size-6" />
+            <HiMiniBars3CenterLeft className="size-6" color="white" />
           </Link>
 
           {/* search input */}
@@ -59,7 +59,7 @@ const Navbar = () => {
                   <img
                     src={avatarImg}
                     alt=""
-                    className={`size-7 rounded-full max-sm:mr-1 ${
+                    className={`size-7 rounded-full max-sm:mr-2 ${
                       currentUser ? "ring-2 ring-blue-500" : ""
                     }`}
                   />
@@ -84,7 +84,7 @@ const Navbar = () => {
             )}
           </div>
           <button className="hidden sm:block">
-            <HiOutlineHeart className="size-6" />
+            <HiOutlineHeart className="size-6" color="white" />
           </button>
 
           <Link
