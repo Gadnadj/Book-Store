@@ -63,7 +63,7 @@ const Register = () => {
           </div>
         </form>
         <p className="font-bold text-gray-800 mt-3 align-baseline text-sm">
-          Already have an account? Please{" "}
+          Have an account? Please{" "}
           <Link to="/login" className="text-blue-500 hover:text-blue-700">
             login
           </Link>
