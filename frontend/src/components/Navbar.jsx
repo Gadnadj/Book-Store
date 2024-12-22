@@ -5,6 +5,7 @@ import { HiOutlineUser } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import avatarImg from "../assets/avatar.png";
 
 const navigation = [
@@ -29,6 +30,7 @@ const navigation = [
 const Navbar = () => {
   const currentUser = false;
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6 bg-gray-900">
@@ -69,8 +71,17 @@ const Navbar = () => {
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-40">
                     <ul className="py-2">
                       {navigation.map((item) => (
-                        <li key={item.name} onClick={() => setisDropdownOpen(false)}>
-                         w <Link to={item.href} className="block px-4 py-2 text-sm hover:bg-gray-100">{item.name}</Link>
+                        <li
+                          key={item.name}
+                          onClick={() => setisDropdownOpen(false)}
+                        >
+                          w{" "}
+                          <Link
+                            to={item.href}
+                            className="block px-4 py-2 text-sm hover:bg-gray-100"
+                          >
+                            {item.name}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -79,7 +90,7 @@ const Navbar = () => {
               </>
             ) : (
               <Link to="/login">
-                <HiOutlineUser className="size-6" color="white"   />
+                <HiOutlineUser className="size-6" color="white" />
               </Link>
             )}
           </div>
@@ -92,7 +103,15 @@ const Navbar = () => {
             className="bg-primary p-1 sm:px-6 px-2 flex item-center rounded-md"
           >
             <HiOutlineShoppingCart className="size-6" />
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            {cartItems.length > 0 ? (
+              <span className="text-md font-semibold sm:ml-1">
+                {cartItems.length}
+              </span>
+            ) : (
+              <span className="text-md font-semibold sm:ml-1">
+                0
+              </span>
+            )}
           </Link>
         </div>
       </nav>
