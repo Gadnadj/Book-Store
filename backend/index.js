@@ -4,9 +4,12 @@ const app = express();
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3000;
+require("dotenv").config();
+
+//J9oYfI0JY4H7x9tY
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/test");
+  await mongoose.connect(process.env.DB_URL);
   app.use("/", (req, res) => {
     res.send("Welcome to my server!");
   });
