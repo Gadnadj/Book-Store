@@ -9,12 +9,14 @@ const baseQuery = fetchBaseQuery({
     if (token) {
       Headers.set("Authorization", `Bearer ${token}`);
     }
+    
     return Headers;
   },
+  
 });
 
 const booksApi = createApi({
-  reducerPath: "bookApi",
+  reducerPath: "booksApi",
   baseQuery,
   tagTypes: ["Books"],
   endpoints: (builder) => ({
