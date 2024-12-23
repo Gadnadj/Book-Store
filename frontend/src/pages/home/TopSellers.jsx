@@ -20,8 +20,8 @@ const categories = [
 const TopSellers = () => {
   const [selectedCategory, setSelectedCategory] = useState("Choose a genre");
 
-  const {data: books = []} = useFetchAllBooksQuery();
-  console.log(books)
+  const { data: books = [] } = useFetchAllBooksQuery();
+  console.log(books);
 
   const filteredBooks =
     selectedCategory === "Choose a genre"
@@ -77,7 +77,7 @@ const TopSellers = () => {
         {filteredBooks.length > 0 &&
           filteredBooks.map((book, index) => (
             <SwiperSlide key={index}>
-              <BookCard book={book} />
+              <BookCard book={{ ...book, _id: String(book._id) }} />
             </SwiperSlide>
           ))}
       </Swiper>

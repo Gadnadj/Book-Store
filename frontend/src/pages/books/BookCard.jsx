@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const BookCard = ({ book }) => {
-
   const dispatch = useDispatch();
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -63,7 +62,7 @@ BookCard.propTypes = {
     description: PropTypes.string.isRequired,
     oldPrice: PropTypes.number.isRequired,
     newPrice: PropTypes.number.isRequired,
-    _id: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
 
