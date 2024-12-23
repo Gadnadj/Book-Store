@@ -1,12 +1,24 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3000;
 require("dotenv").config();
 
-//J9oYfI0JY4H7x9tY
+//middleware
+app.use(express.json());
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    creditientials: true,
+  })
+);
+
+//routes
+const bookRoutes = require("./src/books/book.route");
+app.use("api/books", bookRoutes);
 
 async function main() {
   await mongoose.connect(process.env.DB_URL);
