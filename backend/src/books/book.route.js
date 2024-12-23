@@ -9,18 +9,22 @@ const {
 } = require("./book.controller");
 const router = express.Router();
 
-//post a book
-router.post("/create-book", postABook);
+// <----------------- client side ----------------->
 
 //get all books
 router.get("/", getAllBooks);
 //get single book
 router.get("/:id", getSingleBook);
 
+// <----------------- admin side ----------------->
+
+//post a book
+router.post("/create-book", postABook);
+
 //update a book
 router.put("/edit/:id", updateABook);
 
 //delete a book
-router.put('/delete/:id', deleteABook)
+router.delete('/delete/:id', deleteABook)
 
 module.exports = router;
