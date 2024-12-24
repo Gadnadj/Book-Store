@@ -14,21 +14,17 @@ router.post("/admin", async (req, res) => {
       res.status(404).send({ message: "Admin not found!" });
     }
     if (admin.password !== password) {
-      res.status(401).send({ message: "Invalid password" });
+      res.status(401).send({ message: "Invalid password!" });
     }
 
     const token = jwt.sign(
-      {
-        id: admin._id,
-        username: admin.username,
-        role: admin.role,
-      },
+      { id: admin._id, username: admin.username, role: admin.role },
       JWT_SECRET,
       { expiresIn: "1h" }
     );
-    
+
     return res.status(200).json({
-      message: "Authentification Successful",
+      message: "Authentication successful",
       token: token,
       user: {
         username: admin.username,
