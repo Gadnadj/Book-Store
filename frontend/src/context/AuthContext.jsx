@@ -1,6 +1,8 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
 import PropTypes from "prop-types";
 import React, { createContext, useContext, useState } from "react";
@@ -30,8 +32,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   //login with google
-  const signInWithGoogle = async (email, password) => {
-    return await signInWithGoogle(auth, googleProvider);
+  const signInWithGoogle = async () => {
+    return await signInWithPopup(auth, googleProvider);
   };
 
   const value = {

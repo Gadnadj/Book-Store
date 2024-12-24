@@ -26,16 +26,6 @@ const Login = () => {
       console.error(error);
     }
   };
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      alert("Login successful!");
-      navigate("/");
-    } catch (error) {
-      alert("Google sign in failed");
-      console.error(error);
-    }
-  };
 
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center">
@@ -91,16 +81,6 @@ const Login = () => {
           </Link>
         </p>
 
-        {/* google sign in method */}
-        <div className="mt-4">
-          <button
-            onClick={handleGoogleSignIn}
-            className="w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
-          >
-            <FaGoogle className="mr-2" />
-            Sign In with Google
-          </button>
-        </div>
         <p className="mt-5 text-center text-gray-700 text-xs">
           ©2025 Steimatzky. All rights reserved.
         </p>

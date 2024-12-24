@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const [message, setMessage] = useState("");
-  const { registerUser } = useAuth();
- 
+  const { registerUser, signInWithGoogle } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -26,8 +26,6 @@ const Register = () => {
       console.error(error);
     }
   };
-
-  const handleGoogleSignIn = () => {};
 
   return (
     <div className="h-[calc(100vh-120px)] flex justify-center items-center">
@@ -83,16 +81,6 @@ const Register = () => {
           </Link>
         </p>
 
-        {/* google sign in method */}
-        <div className="mt-4">
-          <button
-            onClick={handleGoogleSignIn}
-            className="w-full flex flex-wrap gap-1 items-center justify-center bg-secondary hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
-          >
-            <FaGoogle className="mr-2" />
-            Sign In with Google
-          </button>
-        </div>
         <p className="mt-5 text-center text-gray-700 text-xs">
           ©2025 Steimatzky. All rights reserved.
         </p>
