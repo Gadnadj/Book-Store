@@ -7,10 +7,8 @@ import {
 import PropTypes from "prop-types";
 import React, { createContext, useContext, useState } from "react";
 import { auth } from "../firebase/firebase.config";
-import { GoogleAuthProvider } from "firebase/auth";
 
 const AuthContext = createContext();
-const googleProvider = new GoogleAuthProvider();
 
 export const useAuth = () => {
   return useContext(AuthContext);
@@ -31,16 +29,10 @@ export const AuthProvider = ({ children }) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
 
-  //login with google
-  const signInWithGoogle = async () => {
-    return await signInWithPopup(auth, googleProvider);
-  };
-
   const value = {
     currentUser,
     registerUser,
     loginUser,
-    signInWithGoogle,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
