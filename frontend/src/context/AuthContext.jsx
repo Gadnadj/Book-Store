@@ -1,11 +1,13 @@
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signInWithRedirect,
+  signOut,
 } from "firebase/auth";
 import PropTypes from "prop-types";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.config";
 
 const AuthContext = createContext();
@@ -29,10 +31,34 @@ export const AuthProvider = ({ children }) => {
     return await signInWithEmailAndPassword(auth, email, password);
   };
 
+  //logout user
+  const logout = () => {
+    return signOut(auth);
+  };
+
+  //manage user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setLoading(false);
+      if (user) {
+        const { email, displayName, photoUrl } = user;
+        const userData = {
+          email,
+          username: displayName,
+          photo: photoUrl,
+        };
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   const value = {
     currentUser,
     registerUser,
     loginUser,
+    signOut,
+    logout,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

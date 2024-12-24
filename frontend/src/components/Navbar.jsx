@@ -7,6 +7,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import avatarImg from "../assets/avatar.png";
+import { useAuth } from "../context/AuthContext";
 
 const navigation = [
   {
@@ -28,9 +29,14 @@ const navigation = [
 ];
 
 const Navbar = () => {
-  const currentUser = false;
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const { currentUser, logout } = useAuth();
+
+  const handleLogOut = () => {
+    logout();
+  };
 
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6 bg-gray-900">
@@ -75,7 +81,7 @@ const Navbar = () => {
                           key={item.name}
                           onClick={() => setisDropdownOpen(false)}
                         >
-                          w{" "}
+                          {" "}
                           <Link
                             to={item.href}
                             className="block px-4 py-2 text-sm hover:bg-gray-100"
@@ -84,6 +90,14 @@ const Navbar = () => {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button
+                          onClick={handleLogOut}
+                          className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                        >
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 )}
@@ -108,9 +122,7 @@ const Navbar = () => {
                 {cartItems.length}
               </span>
             ) : (
-              <span className="text-md font-semibold sm:ml-1">
-                0
-              </span>
+              <span className="text-md font-semibold sm:ml-1">0</span>
             )}
           </Link>
         </div>
