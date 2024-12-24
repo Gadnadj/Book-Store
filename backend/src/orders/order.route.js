@@ -2,4 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 
-module.exports = router
+//create order
+router.post('/', createAOrder)
+
+
+
+module.exports = router;
