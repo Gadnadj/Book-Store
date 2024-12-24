@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiMiniBars3CenterLeft } from "react-icons/hi2";
 import { IoSearchOutline } from "react-icons/io5";
 import { HiOutlineUser } from "react-icons/hi";
@@ -29,6 +29,8 @@ const navigation = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
   const cartItems = useSelector((state) => state.cart.cartItems);
 
@@ -36,6 +38,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logout();
+    navigate("/login");
   };
 
   return (
