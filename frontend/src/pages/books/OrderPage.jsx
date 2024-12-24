@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetOrdersByEmailQuery } from "../../redux/features/cart/orders/ordersApi";
 import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom"; // Assurez-vous d'avoir react-router-dom installé
 
 const OrderPage = () => {
   const { currentUser } = useAuth();
@@ -9,8 +10,9 @@ const OrderPage = () => {
     isLoading,
     isError,
   } = useGetOrdersByEmailQuery(currentUser.email);
-  if (isError) return <div>Loading ...</div>;
-  if (isLoading) return <div>Error getting orders data ...</div>;
+
+  if (isError) return <div>Error fetching orders ...</div>;
+  if (isLoading) return <div>Loading ...</div>;
 
   return (
     <div className="container mx-auto p-6">
@@ -31,14 +33,20 @@ const OrderPage = () => {
               <p className="text-gray-600">Total Price: ${order.totalPrice}</p>
               <h3 className="font-semibold mt-2">Address:</h3>
               <p>
-                {" "}
                 {order.address.city}, {order.address.state},{" "}
                 {order.address.country}, {order.address.zipcode}
               </p>
-              <h3 className="font-semibold mt-2">Products Id:</h3>
+              <h3 className="font-semibold mt-2">Products:</h3>
               <ul>
-                {order.productIds.map((productId) => (
-                  <li key={productId}>{productId}</li>
+                {order.productIds.map((product) => (
+                  <li key={product._id} className="flex items-center mb-2 ">
+                    <Link
+                      to={`/books/${product._id}`}
+                      className="text-blue-500 hover:underline"
+                    >
+                      {product.title}
+                    </Link>
+                  </li>
                 ))}
               </ul>
             </div>
