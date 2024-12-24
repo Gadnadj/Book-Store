@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
-const JWT_SCRET = process.env.JWT_SECRET_KEY;
+const JWT_SECRET = process.env.JWT_SECRET_KEY;
 
 router.post("/admin", async (req, res) => {
   const { username, password } = req.body;
@@ -13,7 +13,7 @@ router.post("/admin", async (req, res) => {
     if (!admin) {
       res.status(404).send({ message: "Admin not found!" });
     }
-    if (username.password !== admin.password) {
+    if (admin.password !== password) {
       res.status(401).send({ message: "Invalid password" });
     }
 
@@ -23,7 +23,7 @@ router.post("/admin", async (req, res) => {
         username: admin.username,
         role: admin.role,
       },
-      JWT_SCRET,
+      JWT_SECRET,
       { expiresIn: "1h" }
     );
     
