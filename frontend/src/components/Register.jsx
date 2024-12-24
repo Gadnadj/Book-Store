@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 const Register = () => {
   const [message, setMessage] = useState("");
   const { registerUser } = useAuth();
+ 
   const {
     register,
     handleSubmit,
@@ -22,8 +23,10 @@ const Register = () => {
       alert("User registered successfully");
     } catch (error) {
       setMessage("Please provide a valid email and password");
+      console.error(error);
     }
   };
+
   const handleGoogleSignIn = () => {};
 
   return (
