@@ -26,6 +26,15 @@ router.post("/admin", async (req, res) => {
       JWT_SCRET,
       { expiresIn: "1h" }
     );
+    
+    return res.status(200).json({
+      message: "Authentification Successful",
+      token: token,
+      user: {
+        username: admin.username,
+        role: admin.role,
+      },
+    });
   } catch (error) {
     console.error("Failed to login as admin", error);
     res.status(401).send({ message: "Failed to login as admin" });
