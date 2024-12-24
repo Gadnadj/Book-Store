@@ -1,28 +1,41 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import getBaseUrl from "../utils/baseUrl"; // Assure-toi que le chemin est correct
 
 const AdminLogin = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-
-  const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
   const onSubmit = async (data) => {
+    console.log("Base URL:", getBaseUrl()); // Vérifie si l'URL est correcte
+    console.log("Form data:", data);
+
     try {
-      navigate("/");
+      const response = await axios.post(
+        `${getBaseUrl()}/api/auth/admin`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const auth = response.data;
+      console.log("Response:", auth);
+      // navigate("/");
     } catch (error) {
       setMessage("Please provide a valid email and password");
-      console.error(error);
+      console.error("Error:", error);
     }
   };
+
   return (
-    <div className="h-[calc(100vh-120px)] flex justify-center items-center">
+    <div className="h-screen flex justify-center items-center">
       <div className="w-full max-w-sm mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h2 className="text-xl font-semibold mb-4">Admin Dashboard Login</h2>
 
@@ -39,7 +52,7 @@ const AdminLogin = () => {
               type="text"
               name="username"
               id="username"
-              placeholder="Enter your username"
+              placeholder="Username"
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow"
             />
           </div>
