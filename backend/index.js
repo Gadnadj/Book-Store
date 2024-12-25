@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://steimatzky-frontend-tl7v.vercel.app/",
+      "https://steimatzky-frontend-tl7v.vercel.app",
     ],
     credentials: true,
   })
