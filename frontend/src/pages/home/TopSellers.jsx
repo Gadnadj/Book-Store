@@ -21,7 +21,7 @@ const TopSellers = () => {
   const [selectedCategory, setSelectedCategory] = useState("Choose a genre");
 
   const { data: books = [] } = useFetchAllBooksQuery();
-  console.log(books);
+  console.log("Books fetched from the API:", books);
 
   const filteredBooks =
     selectedCategory === "Choose a genre"
@@ -29,6 +29,8 @@ const TopSellers = () => {
       : books.filter(
           (book) => book.category === selectedCategory.toLowerCase()
         );
+
+  console.log("Filtered books based on category:", filteredBooks);
 
   return (
     <div className="py-10">
@@ -75,11 +77,14 @@ const TopSellers = () => {
         className="mySwiper"
       >
         {filteredBooks.length > 0 &&
-          filteredBooks.map((book, index) => (
-            <SwiperSlide key={index}>
-              <BookCard book={{ ...book, _id: String(book._id) }} />
-            </SwiperSlide>
-          ))}
+          filteredBooks.map((book, index) => {
+            console.log("Rendering book:", book); // Vérifiez ici les données pour chaque livre
+            return (
+              <SwiperSlide key={index}>
+                <BookCard book={{ ...book, _id: String(book._id) }} />
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
     </div>
   );

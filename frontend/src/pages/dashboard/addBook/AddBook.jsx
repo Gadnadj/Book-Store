@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "./InputField";
 import SelectField from "./SelectField";
 import { useForm } from "react-hook-form";
-import { useAddBookMutation } from "../../../redux/features/books/booksApi";
+import { useAddBookMutation } from "../../../redux/features/cart/books/bookApi";
 import Swal from "sweetalert2";
 
 const AddBook = () => {
@@ -20,16 +20,15 @@ const AddBook = () => {
       ...data,
       coverImage: imageFileName,
     };
+    console.log("Data sent to the server:", newBookData); // Vérifiez que coverImage contient bien le nom du fichier
+
     try {
-      await addBook(newBookData).unwrap();
+      const response = await addBook(newBookData).unwrap();
+      console.log("Server response:", response); // Vérifiez si le serveur retourne une URL complète ou autre info pertinente
       Swal.fire({
         title: "Book added",
         text: "Your book is uploaded successfully!",
         icon: "success",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, It's Okay!",
       });
       reset();
       setimageFileName("");
@@ -45,8 +44,10 @@ const AddBook = () => {
     if (file) {
       setimageFile(file);
       setimageFileName(file.name);
+      console.log("Selected file name:", file.name);
     }
   };
+
   return (
     <div className="max-w-lg   mx-auto md:p-6 p-3 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Add New Book</h2>
