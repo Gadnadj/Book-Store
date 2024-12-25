@@ -40,21 +40,21 @@ const getSingleBook = async (req, res) => {
 const updateABook = async (req, res) => {
   try {
     const { id } = req.params;
-    const updateBook = await Book.findByIdAndUpdate(id, res.body, {
+    const updateBook = await Book.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     if (!updateBook) {
-      res.status(404).send({ message: "Book not found" });
+      return res.status(404).send({ message: "Book not found" });
     }
-    res
-      .status(200)
-      .send({ message: "Book updated successfully!", book: updateBook });
+    res.status(200).send({
+      message: "Book updated successfully!",
+      book: updateBook,
+    });
   } catch (error) {
     console.error("Error updating book", error);
     res.status(500).send({ message: "Failed to update book" });
   }
 };
-
 const deleteABook = async (req, res) => {
   try {
     const { id } = req.params;

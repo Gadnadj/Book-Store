@@ -5,6 +5,7 @@ const {
   getAllBooks,
   getSingleBook,
   deleteABook,
+  updateABook,
 } = require("./book.controller");
 const verifyAdminToken = require("../middleware/verifyAdminToken");
 const router = express.Router();
@@ -18,8 +19,7 @@ router.get("/", getAllBooks);
 // single book endpoint
 router.get("/:id", getSingleBook);
 
-// update a book endpoint
-//router.put("/edit/:id", verifyAdminToken, UpdateBook);
+router.put("/edit/:id", verifyAdminToken, updateABook);
 
 router.delete("/:id", verifyAdminToken, deleteABook);
 
